@@ -40,12 +40,12 @@ Repositorio seguro que contiene la **Identidad** (muy importante) digital de una
 Es un repositorio igual que el keystore pero de **Certificados de entidades en las que ya se ha navegado** la información que contiene este repositorio es la siguiente:
 * **Certificados de Autoridades de Certificación**: Estos son los certificados que emiten y firman otros certificados, estas autoridades son las encargadas de decirnos si confiar en una pagina o no.
 
-### ¿Qué riesgos se mitigan al usar mTLS en lugar de autenticación basada en tokens?
-## Suplantación de identidad y Ataques de hombre en el medio
+## ¿Qué riesgos se mitigan al usar mTLS en lugar de autenticación basada en tokens?
+### Suplantación de identidad y Ataques de hombre en el medio
 Mientras que la autenticación basada en tokens verifica la identidad del cliente a nivel de aplicación después de establecer la conexión TLS, mTLS autentica criptográficamente tanto al cliente como al servidor al inicio del handskahe en la capa de transporte, Esto es un obstaculo gigante para lograr el objetivo del atacante de suplantar alguna de las partes o realizar un ataque de Hombre en el Medio, ya que necesitaría poseer las claves privadas de ambas partes par poder establecer una conexión mTLS válida y no solo interceptar un token.
 
-## Reutilización o robo de tokens
+### Reutilización o robo de tokens
 Con la autenticación basada en tokens, un token robado puede ser reutilizado por un atacante hasta su expiración o revocación, presentando un riesgo significativo. mTLS mitiga este riesgo al vincular criptográficamente el token a la conexión TLS establecida con el certificado del cliente. Si un token es robado, el atacante no va a poder establecer la conexión mTLS que se necesita porque no tiene el certificado ni la clave privada del cliente de verdad, lo que no deja que se reutilice el token en un nuevo contexto de conexión.
 
-## Vulnerabilidades en la implementación de tokens
+### Vulnerabilidades en la implementación de tokens
 La seguridad de los tokens (especialmente JWTs) depende en gran medida de una implementación correcta, siendo susceptibles a vulnerabilidades como el uso de algoritmos débiles o la alteración del token si no se valida correctamente la firma. mTLS, en cambio, basa su seguridad en la criptografía de clave pública y una Infraestructura de Clave Pública (PKI) bien establecida, donde la autenticación se realiza a un nivel más fundamental de la conexión. Esto elimina los riesgos inherentes a las implementaciones de tokens a nivel de aplicación, ya que la identidad se verifica antes de que cualquier token sea procesado, sin depender de "secretos" compartidos que puedan ser comprometidos o de lógicas de validación complejas que puedan ser explotadas.
