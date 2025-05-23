@@ -27,7 +27,7 @@ public class AController {
         try {
             // Load client keystore
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
-            try (FileInputStream ksStream = new FileInputStream("/home/juanpacorralh/certs/servicea.p12")) {
+            try (FileInputStream ksStream = new FileInputStream("/home/juanpacorralh/certs/servicea-malo.p12")) {
                 keyStore.load(ksStream, "changeit".toCharArray());
             }
 
